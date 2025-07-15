@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import React from "react";
 import { colors } from "../styles";
 import arrow_white from "../assets/arrow-white.svg";
 import arrow_black from "../assets/arrow-black.svg";
