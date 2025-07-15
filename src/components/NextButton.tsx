@@ -7,26 +7,25 @@ type ButtonState = "active" | "disabled" | "completed";
 
 interface Prop {
   state: ButtonState;
-  text: string;
 }
 
-const NextButton = ({ state, text }: Prop) => {
+const NextButton = ({ state }: Prop) => {
   const getButtonContent = () => {
     switch (state) {
       case "active":
         return (
           <>
-            {text} <img src={arrow_white} alt="arrow" />
+            다음 <img src={arrow_white} alt="arrow" />
           </>
         );
       case "disabled":
         return (
           <>
-            {text} <img src={arrow_black} alt="arrow" />
+            다음 <img src={arrow_black} alt="arrow" />
           </>
         );
       case "completed":
-        return text;
+        return "학습 완료";
     }
   };
 
