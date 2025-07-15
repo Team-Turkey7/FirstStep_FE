@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { QuizCard } from "./components/QuizCard";
+import { BigText } from "./components/BigText";
 import { GlobalStyle } from "./styles/GlobalStyles";
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <BrowserRouter>
       <GlobalStyle />
       <Routes>
-        <Route path="/" element={<QuizCard num={7} />} />
+        <Route path="/" element={<BigText />} />
       </Routes>
     </BrowserRouter>
   );
