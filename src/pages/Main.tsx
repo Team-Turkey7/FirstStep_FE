@@ -12,7 +12,7 @@ export const Main = () => {
       <img css={StudyIcon} src={Study} />
       <p css={Title}>학습하기</p>
       <p css={Content}>
-        성장을 위한 가장 든든한<span css={Important}>첫걸음</span>, <br />
+        성장을 위한 가장 든든한 <span css={Important}>첫걸음</span>, <br />
         지금 시작하세요
       </p>
       <div css={ButtonGrid}>
