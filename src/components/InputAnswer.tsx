@@ -19,7 +19,7 @@ export const InputAnswer = ({ isClicked, placeholder }: IInputAnswerType) => {
       const answerWhether = inputAnswer === answer;
       setIsAnswer(answerWhether);
     }
-  }, [isClicked]);
+  }, [isClicked, inputAnswer]);
 
   return (
     <InputAnswerContent
