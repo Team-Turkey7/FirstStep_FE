@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
-import confetti from "../assets/8b5cf5e900445458c224e3f44b1efbb3ef9dc105.png";
+import confetti from "../assets/confetti.png";
 import { keyframes } from "@emotion/react";
 
 const CompleteSplash = () => {
