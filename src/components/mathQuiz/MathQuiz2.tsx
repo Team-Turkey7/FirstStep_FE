@@ -27,13 +27,16 @@ export const MathQuiz2 = ({ onNext, onBack }: QuizProps) => {
     const result = inputValue.trim() === correctAnswer;
     setIsCorrect(result);
     setIsGraded(true);
+
+    setTimeout(() => {
+      onNext();
+      console.log("next");
+    }, 1000);
   };
 
   const handleNext = () => {
     if (!isGraded) {
       handleCheckAnswer();
-    } else {
-      onNext();
     }
   };
 
@@ -48,7 +51,7 @@ export const MathQuiz2 = ({ onNext, onBack }: QuizProps) => {
 
       <Content>
         <Title>상황에 따른 사칙연산</Title>
-        <Speaker />
+        <Speaker text="" />
 
         <QuizCardContainer>
           <QuizCard num={8} />

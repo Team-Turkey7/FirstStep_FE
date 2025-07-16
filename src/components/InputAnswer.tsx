@@ -23,6 +23,12 @@ export const InputAnswer = ({
       setIsCorrect(value === answer);
     } else if (isAnswer !== null && isAnswer !== undefined) {
       setIsCorrect(isAnswer);
+
+      if (isAnswer !== null) {
+        setTimeout(() => {
+          setIsCorrect(null);
+        }, 1000);
+      }
     }
   }, [value, answer, isAnswer]);
 
