@@ -106,7 +106,10 @@ const TopicButton = css`
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 `;
 
-const Icon = css``;
+const Icon = css`
+  width: 52px;
+  height: 52px;
+`;
 
 const Subject = css`
   color: white;
