@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
-import { Speaker, NextButton, QuizCard } from "../../components";
+import { Speaker, QuizCard } from "../../components";
+import NextButton from "../NextButton";
 import { InputAnswer } from "../../components/InputAnswer";
 import { backIcon } from "../../assets";
 
@@ -78,7 +79,6 @@ export const MathQuiz1 = ({ onNext, onBack }: QuizProps) => {
       <ButtonWrapper>
         <NextButton
           state={inputValue.trim() ? "active" : "disabled"}
-          text="다음"
           onClick={handleNext}
         />
       </ButtonWrapper>

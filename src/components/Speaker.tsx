@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { colors } from "../styles";
-import speaker from "../assets/ix_sound-loud-filled.svg";
+import speaker from "../assets/sound.svg";
 
 export const Speaker = () => {
   return (

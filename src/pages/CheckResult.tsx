@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import AnswerCard from "../components/AnswerCard";
+import { AnswerCard } from "../components/AnswerCard";
 import NextButton from "../components/NextButton";
 import { MathAnswer } from "../components";
 import { useState } from "react";

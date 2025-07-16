@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import { Speaker, NextButton, QuizCard } from "..";
+import { Speaker, QuizCard } from "..";
+import NextButton from "../NextButton";
 import { backIcon } from "../../assets";
 
 interface QuizProps {
@@ -23,7 +24,7 @@ export const EnQuiz2 = ({ onNext, onBack }: QuizProps) => {
         <QuizCard num={5} />
       </Content>
       <ButtonWrapper>
-        <NextButton state="active" text="다음" onClick={onNext} />
+        <NextButton state="active" onClick={onNext} />
       </ButtonWrapper>
     </Container>
   );
