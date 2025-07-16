@@ -96,11 +96,11 @@ const ButtonWrapper = css`
 
 const TopicButton = css`
   display: flex;
-  width: 123px;
+  width: 129px;
   height: 52px;
   align-items: center;
-  gap: 12px;
-  padding: 22px 142px 22px 75px;
+  gap: 18px;
+  padding: 22px 136px 22px 75px;
   background-color: ${colors.colors.main[40]};
   border-radius: 15px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
