@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Quiz1, Quiz2, Quiz3 } from "../../components";
-import { CategoryDateDataResponse } from "../../apis/types";
+import { CategoryDateDataResponse } from "../../apis/type";
 import { CategoryDateData } from "../../apis";
 import { useParams } from "react-router-dom";
 

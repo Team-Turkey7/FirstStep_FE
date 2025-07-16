@@ -4,7 +4,7 @@ import { QuizCard, Speaker } from "../../components";
 import NextButton from "../NextButton";
 import { InputAnswer } from "../../components/InputAnswer";
 import { backIcon } from "../../assets";
-import { CategoryDateDataResponse } from "../../apis/types";
+import { CategoryDateDataResponse } from "../../apis/type";
 import { MarkingProblemData } from "../../apis";
 import { useNavigate } from "react-router-dom";
 

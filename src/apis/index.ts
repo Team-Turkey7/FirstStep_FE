@@ -4,7 +4,7 @@ import {
   CategoryDateDataResponse,
   MarkingProblemRequest,
   MarkingProblemResponse,
-} from "./types";
+} from "./type";
 
 export const baseUrl = import.meta.env.VITE_BASE_URL;
 
