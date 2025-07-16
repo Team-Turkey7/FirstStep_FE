@@ -1,13 +1,19 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GlobalStyle } from "./styles/GlobalStyles";
-import { LearningView } from "./pages";
+import {
+  KoreanLearningView,
+  EnglishLearningView,
+  MathLearningView,
+} from "./pages";
 
 function App() {
   return (
     <BrowserRouter>
       <GlobalStyle />
       <Routes>
-        <Route path="/learning" element={<LearningView />} />
+        <Route path="/korean" element={<KoreanLearningView />} />
+        <Route path="/english" element={<EnglishLearningView />} />
+        <Route path="/math" element={<MathLearningView />} />
       </Routes>
     </BrowserRouter>
   );

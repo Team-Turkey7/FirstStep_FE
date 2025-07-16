@@ -1,1 +1,3 @@
-export * from "./LearningView";
+export * from "./KoreanLearningView";
+export * from "./EnglishLearningView";
+export * from "./MathLearningView";
