@@ -3,10 +3,20 @@ import React from "react";
 import { colors } from "../styles";
 import speaker from "../assets/ix_sound-loud-filled.svg";
 
-const Speaker = () => {
+interface SpeakerProps {
+  text: string;
+}
+
+const Speaker = ({ text }: SpeakerProps) => {
+  const handleSpeak = () => {
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = "ko-KR";
+    speechSynthesis.speak(utter);
+  };
+
   return (
-    <Container>
-      <img src={speaker} />
+    <Container onClick={handleSpeak}>
+      <img src={speaker} alt="음성 재생" />
     </Container>
   );
 };
