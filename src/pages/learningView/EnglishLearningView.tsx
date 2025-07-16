@@ -14,8 +14,10 @@ export const EnglishLearningView = () => {
     const fetchProblems = async () => {
       try {
         const data = await CategoryDateData("ENGLISH", day);
-        setProblems(data);
-        console.log("영어 문제s", data);
+        if (data) {
+          setProblems(data);
+          console.log("영어 문제s", data);
+        }
       } catch (error) {
         console.error("영어 문제 조회 실패", error);
       }
