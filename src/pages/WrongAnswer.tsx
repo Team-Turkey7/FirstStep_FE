@@ -2,27 +2,63 @@ import styled from "@emotion/styled";
 import NavBar from "../components/NavBar";
 import { AnswerCard } from "../components/AnswerCard";
 import { MathAnswer } from "../components";
+import { useEffect, useState } from "react";
+import { Problem } from "../apis/type";
+import { CheckWrongAnswers } from "../apis/inedx";
 
 const WrongAnswer = () => {
+  const [problems, setProblems] = useState<Problem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchAnswers = async () => {
+      try {
+        const response = await CheckWrongAnswers();
+        setProblems(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("오답 확인 중 오류! : ", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAnswers();
+  }, []);
+
+  if (loading) {
+    return <div>로딩 중...</div>;
+  }
+
   return (
     <Container>
       <NavBar />
       <Section>
         틀린 문제
         <Wrap>
-          <AnswerCard state="all" problem="hello" />
-          <AnswerCard state="all" problem="hello" />
-          <MathAnswer state="all" problemId={1} problem="3+4" answer="7" />
-          <MathAnswer
-            state="all"
-            problemId={2}
-            problem="태수와 고래밥"
-            answer="6개"
-            problemDetail="태수는 20개의 고래밥을 가지고 있다.
-하지만 정욱이가 고래밥이 너무 가지고 싶어
-태수의 고래밥 14개를 뺏었다.
-태수가 가지고 있는 고래밥의 개수는? "
-          />
+          {problems.map((problem) => {
+            if (problem.category === "MATH") {
+              return (
+                <MathAnswer
+                  key={problem.id}
+                  problem={problem.problem}
+                  problemDetail={problem.problemDetail}
+                  answer={problem.answer}
+                  state="all"
+                />
+              );
+            } else {
+              return (
+                <AnswerCard
+                  url={problem.photoUrl}
+                  key={problem.id}
+                  state="all"
+                  answer={problem.answer}
+                  problem={problem.problem}
+                />
+              );
+            }
+          })}
         </Wrap>
       </Section>
     </Container>

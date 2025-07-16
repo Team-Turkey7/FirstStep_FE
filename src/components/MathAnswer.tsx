@@ -9,7 +9,7 @@ interface ITestType {
   isCorrect?: boolean;
   problem: string;
   problemDetail?: string;
-  answer: string;
+  answer?: string;
 }
 
 export const MathAnswer = ({

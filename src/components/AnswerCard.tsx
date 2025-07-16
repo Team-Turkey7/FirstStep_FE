@@ -1,17 +1,24 @@
 import styled from "@emotion/styled";
 import check from "../assets/check.svg";
 import cross from "../assets/cross.svg";
-import apple from "../assets/apple.svg";
 
 type CardState = "all" | "wrong" | "right";
 
 interface Prop {
   state?: string;
-  answer: string;
+  problem?: string;
+  answer?: string;
   isCorrect?: boolean;
+  url: string;
 }
 
-export const AnswerCard = ({ state, answer, isCorrect }: Prop) => {
+export const AnswerCard = ({
+  state,
+  answer,
+  isCorrect,
+  problem,
+  url,
+}: Prop) => {
   const getDisplayState = () => {
     if (state === "all") return "all";
     return isCorrect ? "wrong" : "right";
@@ -23,7 +30,9 @@ export const AnswerCard = ({ state, answer, isCorrect }: Prop) => {
     if (displayState === "all") {
       return (
         <Wrap>
-          <img src={apple} />
+          <img src={url} />
+          {problem}
+          {" : "}
           {answer}
         </Wrap>
       );
@@ -32,7 +41,8 @@ export const AnswerCard = ({ state, answer, isCorrect }: Prop) => {
     return (
       <>
         <Wrap>
-          <img src={apple} />
+          <img src={url} />
+          {problem}
           {answer}
         </Wrap>
         <img src={displayState === "right" ? check : cross} />
@@ -72,4 +82,8 @@ const Wrap = styled.div`
   display: flex;
   align-items: center;
   gap: 15px;
+  img {
+    width: 35px;
+    height: 35px;
+  }
 `;

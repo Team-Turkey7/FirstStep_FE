@@ -63,6 +63,7 @@ const CheckResult = () => {
             } else if (problem.level === 3) {
               return (
                 <AnswerCard
+                  url={problem.photoUrl}
                   key={problem.id}
                   answer={problem.answer}
                   isCorrect={problem.isCorrect}
