@@ -4,11 +4,18 @@ import DayButton from "../components/DayButton";
 import { colors } from "../styles";
 import MyIcon from "../assets/img/MyIcon.svg";
 import Study from "../assets/img/Study.svg";
+import { useNavigate } from "react-router-dom";
 
 export const Main = () => {
+  const navigate = useNavigate();
+
+  const handleDayClick = (day: number) => {
+    navigate("/study", { state: { day } });
+  };
+
   return (
     <div css={Container}>
-      <img css={My} src={MyIcon} />
+      <img css={My} src={MyIcon} onClick={() => navigate("/")} />
       <img css={StudyIcon} src={Study} />
       <p css={Title}>학습하기</p>
       <p css={Content}>
@@ -17,7 +24,12 @@ export const Main = () => {
       </p>
       <div css={ButtonGrid}>
         {Array.from({ length: 30 }, (_, i) => (
-          <DayButton key={i + 1} day={(i + 1).toString()} isCompleted={true} />
+          <DayButton
+            key={i + 1}
+            day={(i + 1).toString()}
+            isCompleted={true}
+            onClick={() => handleDayClick(i + 1)}
+          />
         ))}
       </div>
     </div>

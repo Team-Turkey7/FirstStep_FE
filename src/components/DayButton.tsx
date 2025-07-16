@@ -5,10 +5,15 @@ import { colors } from "../styles";
 interface Prop {
   day: string;
   isCompleted?: boolean;
+  onClick: () => void;
 }
 
-const DayButton = ({ day, isCompleted = false }: Prop) => {
-  return <Container isCompleted={isCompleted}>{day}일차</Container>;
+const DayButton = ({ day, isCompleted = false, onClick }: Prop) => {
+  return (
+    <Container isCompleted={isCompleted} onClick={onClick}>
+      {day}일차
+    </Container>
+  );
 };
 
 const Container = styled.div<{ isCompleted: boolean }>`
