@@ -8,9 +8,10 @@ type ButtonState = "active" | "disabled" | "completed";
 interface Prop {
   state: ButtonState;
   text: string;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const NextButton = ({ state, text }: Prop) => {
+export const NextButton = ({ state, text, onClick }: Prop) => {
   const getButtonContent = () => {
     switch (state) {
       case "active":
@@ -31,7 +32,7 @@ const NextButton = ({ state, text }: Prop) => {
   };
 
   return (
-    <Button state={state} disabled={state === "disabled"}>
+    <Button state={state} disabled={state === "disabled"} onClick={onClick}>
       {getButtonContent()}
     </Button>
   );
@@ -77,5 +78,3 @@ const Button = styled.button<{ state: ButtonState }>`
     right: 14px;
   }
 `;
-
-export default NextButton;
