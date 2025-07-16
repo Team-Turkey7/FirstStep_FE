@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import check from "../assets/ic_round-check.svg";
-import cross from "../assets/bitcoin-icons_cross-filled.svg";
-import apple from "../assets/twemoji_red-apple.svg";
+import check from "../assets/check.svg";
+import cross from "../assets/cross.svg";
+import apple from "../assets/apple.svg";
 
 type CardState = "right" | "wrong" | "all";
 
