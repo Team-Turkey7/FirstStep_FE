@@ -14,8 +14,10 @@ export const MathLearningView = () => {
     const fetchProblems = async () => {
       try {
         const data = await CategoryDateData("MATH", day);
-        setProblems(data);
-        console.log("연산 문제s", data);
+        if (data) {
+          setProblems(data);
+          console.log("연산 문제s", data);
+        }
       } catch (error) {
         console.error("연산 문제 조회 실패", error);
       }

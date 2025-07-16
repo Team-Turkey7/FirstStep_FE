@@ -35,6 +35,7 @@ export const CategoryDateData = async (category: string, date: string) => {
     }
 
     console.error("알 수 없는 에러:", err);
+    throw new Error("알 수 없는 에러가 발생하였습니다.");
   }
 };
 
@@ -60,9 +61,21 @@ export const MarkingProblemData = async (id: string, userAnswer: string) => {
     }
     throw err;
   }
+};
 
 import { CompletionResponse } from "./type";
 
 //완료 여부 전체 조회 api
 export const Complete = async () => {
-  return await axios.get<CompletionResponse>(`${baseUrl}/problem/completion`);
+  try {
+    const response = await axios.get<CompletionResponse[]>(
+      `${baseUrl}/problem/completion`
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.message) {
+      throw new Error(error.response?.data.message);
+    }
+    throw new Error("알 수 없는 에러 발생");
+  }
+};
