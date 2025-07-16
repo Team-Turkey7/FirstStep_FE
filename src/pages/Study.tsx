@@ -119,8 +119,8 @@ const ButtonWrapper = css`
 
 const TopicButton = css`
   display: flex;
-  width: 129px;
-  height: 52px;
+  width: 340px;
+  height: 96px;
   align-items: center;
   gap: 18px;
   padding: 22px 136px 22px 75px;

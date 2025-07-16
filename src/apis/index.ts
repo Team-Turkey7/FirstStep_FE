@@ -21,7 +21,6 @@ export const CategoryDateData = async (category: string, date: string) => {
     console.log("성공 응답:", response.data);
     return response.data;
   } catch (err) {
-    console.error("=== 에러 상세 정보 ===");
     console.error("전체 에러:", err);
 
     if (axios.isAxiosError(err)) {
@@ -35,9 +34,7 @@ export const CategoryDateData = async (category: string, date: string) => {
       );
     }
 
-    // axios 에러가 아닌 경우
     console.error("알 수 없는 에러:", err);
-    throw new Error("알 수 없는 에러가 발생했습니다");
   }
 };
 
@@ -63,4 +60,9 @@ export const MarkingProblemData = async (id: string, userAnswer: string) => {
     }
     throw err;
   }
-};
+
+import { CompletionResponse } from "./type";
+
+//완료 여부 전체 조회 api
+export const Complete = async () => {
+  return await axios.get<CompletionResponse>(`${baseUrl}/problem/completion`);

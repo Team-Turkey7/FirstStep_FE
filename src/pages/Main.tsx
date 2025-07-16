@@ -5,9 +5,25 @@ import { colors } from "../styles";
 import MyIcon from "../assets/img/MyIcon.svg";
 import Study from "../assets/img/Study.svg";
 import { useNavigate } from "react-router-dom";
+import { Complete } from "../apis";
+import { CompletionResponse } from "../apis/type";
+import { useEffect, useState } from "react";
 
 export const Main = () => {
   const navigate = useNavigate();
+  const [data, setData] = useState<CompletionResponse[] | null>(null);
+
+  useEffect(() => {
+    const getCompleteResult = async () => {
+      try {
+        const response = await Complete();
+        setData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getCompleteResult();
+  }, []);
 
   const handleDayClick = (day: number) => {
     navigate(`/study/${day}`);
@@ -23,12 +39,14 @@ export const Main = () => {
         지금 시작하세요
       </p>
       <div css={ButtonGrid}>
-        {Array.from({ length: 30 }, (_, i) => (
+        {data?.map((index) => (
           <DayButton
-            key={i + 1}
-            day={(i + 1).toString()}
-            isCompleted={true}
-            onClick={() => handleDayClick(i + 1)}
+            key={index.date}
+            day={index.date.toString()}
+            completed={index.complete}
+            onClick={() =>
+              handleDayClick(parseInt(index.date.replace("일차", ""), 10))
+            }
           />
         ))}
       </div>
