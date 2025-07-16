@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
-import React from "react";
-import arrow from "../assets/material-symbols_arrow-back-rounded.svg";
+import { arrowLeft } from "../assets";
 
 interface Prop {
   day?: string;
@@ -9,7 +8,7 @@ interface Prop {
 const NavBar = ({ day }: Prop) => {
   return (
     <Container>
-      <img src={arrow} />
+      <img src={arrowLeft} />
       {day ? `${day}일차` : ""}
     </Container>
   );
