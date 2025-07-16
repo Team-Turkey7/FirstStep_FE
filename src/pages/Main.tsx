@@ -15,7 +15,7 @@ export const Main = () => {
 
   return (
     <div css={Container}>
-      <img css={My} src={MyIcon} onClick={() => navigate("/")} />
+      <img css={My} src={MyIcon} onClick={() => navigate("/wrong-answer")} />
       <img css={StudyIcon} src={Study} />
       <p css={Title}>학습하기</p>
       <p css={Content}>

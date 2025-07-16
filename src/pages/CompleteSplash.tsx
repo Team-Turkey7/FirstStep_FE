@@ -10,7 +10,7 @@ const CompleteSplash = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/");
+      navigate("/main");
     }, 2000);
 
     return () => clearTimeout(timer);

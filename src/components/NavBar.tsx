@@ -1,14 +1,16 @@
 import styled from "@emotion/styled";
 import { arrowLeft } from "../assets";
+import { useNavigate } from "react-router-dom";
 
 interface Prop {
   day?: string;
 }
 
 const NavBar = ({ day }: Prop) => {
+  const navigate = useNavigate();
   return (
     <Container>
-      <img src={arrowLeft} />
+      <img src={arrowLeft} onClick={() => navigate(-1)} />
       {day ? `${day}일차` : ""}
     </Container>
   );
