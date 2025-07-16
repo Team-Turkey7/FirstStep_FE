@@ -10,7 +10,7 @@ export const Main = () => {
   const navigate = useNavigate();
 
   const handleDayClick = (day: number) => {
-    navigate("/study", { state: { day } });
+    navigate(`/study/${day}`);
   };
 
   return (
