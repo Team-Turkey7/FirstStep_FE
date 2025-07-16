@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import check from "../assets/ic_round-check.svg";
-import cross from "../assets/bitcoin-icons_cross-filled.svg";
-import apple from "../assets/twemoji_red-apple.svg";
+import check from "../assets/check.svg";
+import cross from "../assets/cross.svg";
+import apple from "../assets/apple.svg";
 
 type CardState = "right" | "wrong" | "all";
 
@@ -10,7 +10,7 @@ interface Prop {
   problem: string;
 }
 
-const AnswerCard = ({ state, problem }: Prop) => {
+export const AnswerCard = ({ state, problem }: Prop) => {
   const getCardContent = () => {
     switch (state) {
       case "right":
@@ -29,7 +29,7 @@ const AnswerCard = ({ state, problem }: Prop) => {
             <Wrap>
               <img src={apple} />
               {problem}
-            </Wrap>{" "}
+            </Wrap>
             <img src={cross} />
           </>
         );
@@ -76,5 +76,3 @@ const Wrap = styled.div`
   align-items: center;
   gap: 15px;
 `;
-
-export default AnswerCard;

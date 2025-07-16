@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
-import React from "react";
 import { colors } from "../styles";
-import speaker from "../assets/ix_sound-loud-filled.svg";
+import speaker from "../assets/sound.svg";
 
 interface SpeakerProps {
   text: string;
@@ -32,5 +31,3 @@ const Container = styled.div`
   background-color: ${colors.colors.main[30]};
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 `;
-
-export default Speaker;

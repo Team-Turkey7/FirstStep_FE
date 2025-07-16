@@ -1,37 +1,36 @@
 import styled from "@emotion/styled";
 import { colors } from "../styles";
-import arrow_white from "../assets/arrow-white.svg";
-import arrow_black from "../assets/arrow-black.svg";
+import { whiteArrowRight, blackArrowRight } from "../assets";
 
 type ButtonState = "active" | "disabled" | "completed";
 
 interface Prop {
   state: ButtonState;
-  text: string;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const NextButton = ({ state, text }: Prop) => {
+const NextButton = ({ state, onClick }: Prop) => {
   const getButtonContent = () => {
     switch (state) {
       case "active":
         return (
           <>
-            {text} <img src={arrow_white} alt="arrow" />
+            다음 <img src={whiteArrowRight} alt="arrow" />
           </>
         );
       case "disabled":
         return (
           <>
-            {text} <img src={arrow_black} alt="arrow" />
+            다음 <img src={blackArrowRight} alt="arrow" />
           </>
         );
       case "completed":
-        return text;
+        return "학습 완료";
     }
   };
 
   return (
-    <Button state={state} disabled={state === "disabled"}>
+    <Button state={state} disabled={state === "disabled"} onClick={onClick}>
       {getButtonContent()}
     </Button>
   );

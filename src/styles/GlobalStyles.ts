@@ -8,6 +8,7 @@ export const GlobalStyle = () =>
         margin: 0;
         padding: 0;
         font-family: Pretendard;
+        box-sizing: border-box;
       }
     `,
   });

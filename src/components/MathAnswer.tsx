@@ -2,14 +2,18 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import { bottomArrow } from "../assets";
 
+type AnswerState = "right" | "wrong" | "all";
+
 interface ITestType {
+  state: AnswerState;
   problemId: number;
   problem: string;
-  problemDetail: string;
+  problemDetail?: string;
   answer: string;
 }
 
 export const MathAnswer = ({
+  state,
   problemId,
   problem,
   problemDetail,
@@ -18,7 +22,11 @@ export const MathAnswer = ({
   const [active, setActive] = useState(false);
 
   return (
-    <Wrapper key={problemId} onClick={() => setActive((prev) => !prev)}>
+    <Wrapper
+      state={state}
+      key={problemId}
+      onClick={() => setActive((prev) => !prev)}
+    >
       <Header>
         <Question>{problem}</Question>
         <ArrowIcon $active={active}>
@@ -38,16 +46,27 @@ export const MathAnswer = ({
 const ProblemDetail = styled.div`
   margin-bottom: 15px;
   font-size: 16px;
+  font-weight: 500;
+  word-break: keep-all;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ state: AnswerState }>`
   width: 340px;
-  background-color: #d3d3d3;
   border-radius: 15px;
   padding: 16px 20px;
   box-sizing: border-box;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  background-color: ${({ state }) => {
+    switch (state) {
+      case "right":
+        return "#D4FFB3";
+      case "wrong":
+        return "#FFC8C8";
+      case "all":
+        return "#D3D3D3";
+    }
+  }};
 `;
 
 const Header = styled.div`
