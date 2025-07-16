@@ -2,26 +2,44 @@ import styled from "@emotion/styled";
 import { Speaker, QuizCard } from "..";
 import { backIcon } from "../../assets";
 import NextButton from "../NextButton";
+import { CategoryDateDataResponse } from "../../apis/types";
 
 interface QuizProps {
   onNext: () => void;
   onBack: () => void;
+  problems: CategoryDateDataResponse[];
+  day: string;
 }
 
-export const Quiz1 = ({ onNext, onBack }: QuizProps) => {
+export const Quiz1 = ({ onNext, onBack, problems, day }: QuizProps) => {
+  const levelProblems = problems.filter((problem) => problem.level === 1);
+  const currentProblem = levelProblems[0];
+
+  if (!currentProblem) {
+    return (
+      <Container>
+        <div>문제를 불러오는 중</div>
+      </Container>
+    );
+  }
+
   return (
     <Container>
       <Header>
         <BackButton onClick={onBack}>
           <img src={backIcon} alt="뒤로가기" />
         </BackButton>
-        <DayText>1일차</DayText>
+        <DayText>{day}</DayText>
       </Header>
 
       <Content>
         <Title>자음/모음</Title>
-        <Speaker text="" />
-        <QuizCard num={1} />
+        <Speaker text={currentProblem.problem} />
+        <QuizCard
+          num={1}
+          problem={currentProblem.problem}
+          problemDetail={currentProblem.problemDetail}
+        />
       </Content>
       <ButtonWrapper>
         <NextButton state="active" onClick={onNext} />

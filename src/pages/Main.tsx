@@ -26,7 +26,7 @@ export const Main = () => {
   }, []);
 
   const handleDayClick = (day: number) => {
-    navigate("/study", { state: { day } });
+    navigate(`/study/${day}`);
   };
 
   return (

@@ -7,7 +7,7 @@ import { colors } from "../styles";
 import { Speaker } from "../components/Speaker";
 import backIcon from "../assets/img/backIcon.svg";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Topic = [
   { icon: KoreanIcon, name: "한글" },
@@ -16,25 +16,41 @@ const Topic = [
 ];
 
 export const Study = () => {
-  const location = useLocation();
-  const day = location.state?.day || 1;
   const navigate = useNavigate();
   const [selectedTopic, setSelectedTopic] = useState("한글, 영어, 연산");
+  const { date } = useParams<{ date: string }>();
+  const day = `${date}일차`;
+
+  const handleTopicSelect = (topicName: string) => {
+    setSelectedTopic(topicName);
+
+    if (topicName === "한글") {
+      navigate(`/korean/${date}`);
+    } else if (topicName === "영어") {
+      navigate(`/english/${date}`);
+    } else if (topicName === "연산") {
+      navigate(`/math/${date}`);
+    }
+  };
 
   return (
     <div css={Container}>
       <div css={Header}>
         <img css={BackButton} src={backIcon} onClick={() => navigate(-1)} />
-        <p css={DayText}>{day}일차</p>
+        <p css={DayText}>{day}</p>
       </div>
       <div css={Content}>
         <p css={Title}>학습하기</p>
         <Speaker text={selectedTopic} />
         <div css={ButtonWrapper}>
-          {Topic.map((index) => (
-            <div css={TopicButton} onClick={() => setSelectedTopic(index.name)}>
-              <img css={Icon} src={index.icon} />
-              <p css={Subject}>{index.name}</p>
+          {Topic.map((topic, index) => (
+            <div
+              key={index}
+              css={TopicButton}
+              onClick={() => handleTopicSelect(topic.name)}
+            >
+              <img css={Icon} src={topic.icon} />
+              <p css={Subject}>{topic.name}</p>
             </div>
           ))}
         </div>
