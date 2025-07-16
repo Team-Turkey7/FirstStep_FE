@@ -31,7 +31,15 @@ const FullScreen = css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 60px 20px 20px 60px;
+  padding: 60px 20px 20px 20px;
+
+  @media (max-width: 768px) {
+    padding: 40px 16px 16px 16px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 30px 12px 12px 12px;
+  }
 `;
 
 const Header = css`
@@ -41,11 +49,25 @@ const Header = css`
 `;
 
 const BackButton = css`
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   cursor: pointer;
   margin-left: 20px;
   margin-top: 20px;
+
+  @media (max-width: 768px) {
+    width: 20px;
+    height: 20px;
+    margin-left: 16px;
+    margin-top: 16px;
+  }
+
+  @media (max-width: 480px) {
+    width: 18px;
+    height: 18px;
+    margin-left: 12px;
+    margin-top: 12px;
+  }
 `;
 
 const ContentWrapper = css`
@@ -54,6 +76,14 @@ const ContentWrapper = css`
   justify-content: center;
   align-items: center;
   padding: 20px;
+
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 12px;
+  }
 `;
 
 const Container = css`
@@ -66,6 +96,22 @@ const Container = css`
   flex-direction: column;
   padding: 30px 24px;
   position: relative;
+
+  @media (max-width: 768px) {
+    width: 95%;
+    max-width: 350px;
+    height: 75%;
+    padding: 24px 20px;
+    border-radius: 12px;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    max-width: 320px;
+    height: 70%;
+    padding: 20px 16px;
+    border-radius: 10px;
+  }
 `;
 
 const Text = css`
@@ -77,6 +123,21 @@ const Text = css`
   align-items: flex-start;
   text-align: left;
   line-height: 1.4;
+  word-spacing: 0.3em;
+
+  @media (max-width: 768px) {
+    font-size: 28px;
+    line-height: 1.3;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  @media (max-width: 360px) {
+    font-size: 20px;
+  }
 `;
 
 const Icon = css`
@@ -85,4 +146,14 @@ const Icon = css`
   margin-top: auto;
   width: 65px;
   height: 80px;
+
+  @media (max-width: 768px) {
+    width: 55px;
+    height: 68px;
+  }
+
+  @media (max-width: 480px) {
+    width: 45px;
+    height: 56px;
+  }
 `;

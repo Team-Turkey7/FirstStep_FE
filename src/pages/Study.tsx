@@ -4,7 +4,7 @@ import KoreanIcon from "../assets/img/Korean.svg";
 import EnglishIcon from "../assets/img/English.svg";
 import MathIcon from "../assets/img/Math.svg";
 import { colors } from "../styles";
-import Speaker from "../components/Speaker";
+import { Speaker } from "../components/Speaker";
 import backIcon from "../assets/img/backIcon.svg";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";

@@ -20,7 +20,7 @@ export const Quiz1 = ({ onNext, onBack }: QuizProps) => {
 
       <Content>
         <Title>자음/모음</Title>
-        <Speaker />
+        <Speaker text="" />
         <QuizCard num={1} />
       </Content>
       <ButtonWrapper>

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
-import { Speaker, QuizCard } from "../../components";
+import { QuizCard, Speaker } from "../../components";
 import NextButton from "../NextButton";
 import { InputAnswer } from "../../components/InputAnswer";
 import { backIcon } from "../../assets";
@@ -27,13 +27,16 @@ export const EnQuiz3 = ({ onNext, onBack }: QuizProps) => {
     const result = inputValue.trim() === correctAnswer;
     setIsCorrect(result);
     setIsGraded(true);
+
+    setTimeout(() => {
+      onNext();
+      console.log("next");
+    }, 1000);
   };
 
   const handleNext = () => {
     if (!isGraded) {
       handleCheckAnswer();
-    } else {
-      onNext();
     }
   };
 
@@ -48,7 +51,7 @@ export const EnQuiz3 = ({ onNext, onBack }: QuizProps) => {
 
       <Content>
         <Title>그림보고 단어 맞추기</Title>
-        <Speaker />
+        <Speaker text="" />
 
         <QuizCardContainer>
           <QuizCard num={6} />

@@ -27,6 +27,11 @@ export const Quiz3 = ({ onNext, onBack }: QuizProps) => {
     const result = inputValue.trim() === correctAnswer;
     setIsCorrect(result);
     setIsGraded(true);
+
+    setTimeout(() => {
+      onNext();
+      console.log("next");
+    }, 1000);
   };
 
   const handleNext = () => {
@@ -48,7 +53,7 @@ export const Quiz3 = ({ onNext, onBack }: QuizProps) => {
 
       <Content>
         <Title>그림보고 단어 맞추기</Title>
-        <Speaker />
+        <Speaker text="" />
 
         <QuizCardContainer>
           <QuizCard num={3} />

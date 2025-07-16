@@ -20,7 +20,7 @@ export const EnQuiz1 = ({ onNext, onBack }: QuizProps) => {
 
       <Content>
         <Title>알파벳</Title>
-        <Speaker />
+        <Speaker text="" />
         <QuizCard num={4} />
       </Content>
       <ButtonWrapper>

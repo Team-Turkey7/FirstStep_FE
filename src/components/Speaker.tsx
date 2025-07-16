@@ -6,7 +6,7 @@ interface SpeakerProps {
   text: string;
 }
 
-const Speaker = ({ text }: SpeakerProps) => {
+export const Speaker = ({ text }: SpeakerProps) => {
   const handleSpeak = () => {
     const utter = new SpeechSynthesisUtterance(text);
     utter.lang = "ko-KR";
