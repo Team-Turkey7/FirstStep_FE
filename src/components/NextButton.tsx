@@ -7,9 +7,10 @@ type ButtonState = "active" | "disabled" | "completed";
 
 interface Prop {
   state: ButtonState;
+  onClick: () => void;
 }
 
-const NextButton = ({ state }: Prop) => {
+const NextButton = ({ state, onClick }: Prop) => {
   const getButtonContent = () => {
     switch (state) {
       case "active":
@@ -30,7 +31,7 @@ const NextButton = ({ state }: Prop) => {
   };
 
   return (
-    <Button state={state} disabled={state === "disabled"}>
+    <Button state={state} disabled={state === "disabled"} onClick={onClick}>
       {getButtonContent()}
     </Button>
   );
