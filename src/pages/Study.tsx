@@ -7,7 +7,7 @@ import { colors } from "../styles";
 import Speaker from "../components/Speaker";
 import backIcon from "../assets/img/backIcon.svg";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Topic = [
   { icon: KoreanIcon, name: "한글" },
@@ -18,11 +18,12 @@ const Topic = [
 export const Study = () => {
   const location = useLocation();
   const day = location.state?.day || 1;
+  const navigate = useNavigate();
   const [selectedTopic, setSelectedTopic] = useState("한글, 영어, 연산");
   return (
     <div css={Container}>
       <div css={Header}>
-        <img css={BackButton} src={backIcon} />
+        <img css={BackButton} src={backIcon} onClick={() => navigate(-1)} />
         <p css={DayText}>{day}일차</p>
       </div>
       <div css={Content}>
