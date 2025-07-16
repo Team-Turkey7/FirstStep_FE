@@ -23,9 +23,9 @@ function App() {
         <Route path="/korean" element={<KoreanLearningView />} />
         <Route path="/english" element={<EnglishLearningView />} />
         <Route path="/math" element={<MathLearningView />} />
-        <Route path="check-result" element={<CheckResult />} />
-        <Route path="complete-splash" element={<CompleteSplash />} />
-        <Route path="wrong-answer" element={<WrongAnswer />} />
+        <Route path="/check-result" element={<CheckResult />} />
+        <Route path="/complete-splash" element={<CompleteSplash />} />
+        <Route path="/wrong-answer" element={<WrongAnswer />} />
       </Routes>
     </BrowserRouter>
   );
