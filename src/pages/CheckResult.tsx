@@ -2,8 +2,19 @@ import styled from "@emotion/styled";
 import AnswerCard from "../components/AnswerCard";
 import NextButton from "../components/NextButton";
 import { MathAnswer } from "../components";
+import { useState } from "react";
+import CompleteSplash from "./CompleteSplash";
 
 const CheckResult = () => {
+  const [showSplash, setShowSplash] = useState(false);
+
+  const handleComplete = () => {
+    setShowSplash(true);
+  };
+
+  if (showSplash) {
+    return <CompleteSplash />;
+  }
   return (
     <Container>
       <Section>
@@ -26,7 +37,7 @@ const CheckResult = () => {
           />
         </CardWrap>
       </Section>
-      <NextButton state="completed" />
+      <NextButton state="completed" onClick={handleComplete} />
     </Container>
   );
 };
