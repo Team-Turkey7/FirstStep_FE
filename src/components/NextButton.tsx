@@ -6,7 +6,7 @@ type ButtonState = "active" | "disabled" | "completed";
 
 interface Prop {
   state: ButtonState;
-  onClick: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const NextButton = ({ state, onClick }: Prop) => {

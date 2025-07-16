@@ -2,60 +2,66 @@ import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 
 interface IInputAnswerType {
-  isClicked: boolean;
   placeholder: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  answer?: string;
+  isAnswer?: boolean | null;
 }
 
-// 더미 정답
-const answer = "사과";
+export const InputAnswer = ({
+  placeholder,
+  value,
+  onChange,
+  answer,
+  isAnswer,
+}: IInputAnswerType) => {
+  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
-export const InputAnswer = ({ isClicked, placeholder }: IInputAnswerType) => {
-  const [inputAnswer, setInputAnswer] = useState<string>("");
-  const [isAnswer, setIsAnswer] = useState<boolean | null>(null);
-
-  // isClicked가 true가 되면 정답 여부 판단
   useEffect(() => {
-    if (isClicked) {
-      const answerWhether = inputAnswer === answer;
-      setIsAnswer(answerWhether);
+    if (answer) {
+      setIsCorrect(value === answer);
+    } else if (isAnswer !== null && isAnswer !== undefined) {
+      setIsCorrect(isAnswer);
     }
-  }, [isClicked, inputAnswer]);
+  }, [value, answer, isAnswer]);
 
   return (
     <InputAnswerContent
-      $isClicked={isClicked}
-      $isAnswer={isAnswer}
       type="text"
+      value={value}
+      $isAnswer={isCorrect}
       placeholder={placeholder}
-      value={inputAnswer}
-      onChange={(e) => setInputAnswer(e.target.value)}
-      readOnly={isClicked} // 클릭 후 입력 막기
+      onChange={onChange}
     />
   );
 };
 
-const InputAnswerContent = styled.input<{
-  $isClicked: boolean;
-  $isAnswer: boolean | null;
-}>`
-  width: 264px;
+const InputAnswerContent = styled.input<{ $isAnswer: boolean | null }>`
+  width: 290px;
   height: 48px;
   font-size: 24px;
+  border: ${({ $isAnswer }) =>
+    $isAnswer === true
+      ? "2px solid #12D022"
+      : $isAnswer === false
+      ? "2px solid #FF2A2A"
+      : "none"};
+  border-bottom: ${({ $isAnswer }) =>
+    $isAnswer === true
+      ? "2px solid #12D022"
+      : $isAnswer === false
+      ? "2px solid #FF2A2A"
+      : "2px dashed #000000"};
+  border-radius: ${({ $isAnswer }) => ($isAnswer !== null ? "8px" : "0")};
   text-align: center;
-  border: none;
-  padding: 0 8px;
-  outline: none;
+  background: transparent;
 
-  ${({ $isClicked, $isAnswer }) =>
-    $isClicked && $isAnswer !== null
-      ? `
-    box-shadow: inset 0 0 0 2px ${$isAnswer ? "#12D022" : "#FF2A2A"};
-    border-radius: 8px;
-  `
-      : `
-    border-bottom: 2px dashed #000000;
-    border-radius: 0;
-  `}
+  &:focus {
+    outline: none;
+  }
 
-  transition: all 0.2s ease;
+  &::placeholder {
+    color: #999;
+  }
 `;

@@ -1,12 +1,37 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { useState } from "react";
 import seatchIcon from "../assets/img/searchIcon.svg";
+import { BigText } from "./BigText";
 
 interface QuizCardProps {
   num: number;
 }
 
 export const QuizCard = ({ num }: QuizCardProps) => {
+  const [showBigText, setShowBigText] = useState(false);
+
+  const onclickDetail = () => {
+    setShowBigText(true);
+  };
+
+  const closeBigText = () => {
+    setShowBigText(false);
+  };
+
+  const problemDetail =
+    "태수는 20개의 고래밥을 가지고 있다. 하지만 정욱이가 고래밥이 너무 가지고 싶어 태수의 고래밥 14개를 뺏었다. 태수가 가지고 있는 고래밥의 개수는?";
+
+  if (showBigText) {
+    return (
+      <div css={OverlayContainer} onClick={closeBigText}>
+        <div css={BigTextWrapper} onClick={(e) => e.stopPropagation()}>
+          <BigText problemDetail={problemDetail} onBack={closeBigText} />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div css={Container}>
       {num === 1 && (
@@ -39,17 +64,23 @@ export const QuizCard = ({ num }: QuizCardProps) => {
           <p css={Pronunciation}>사과</p>
         </>
       )}
+      {num === 6 && (
+        <img
+          css={Image}
+          src="https://item.kakaocdn.net/do/bd24f6a0b8e2710b109ed04a636b969c8b566dca82634c93f811198148a26065"
+        />
+      )}
 
-      {num === 6 && <p css={Text}>3+4</p>}
+      {num === 7 && <p css={Text}>3+4</p>}
 
-      {num === 7 && (
+      {num === 8 && (
         <>
           <p css={Problem}>
             태수는 20개의 고래밥을 가지고 있다. 하지만 정욱이가 고래밥이 너무
             가지고 싶어 태수의 고래밥 14개를 뺏었다. 태수가 가지고 있는 고래밥의
             개수는?
           </p>
-          <img css={Icon} src={seatchIcon} />
+          <img css={Icon} src={seatchIcon} onClick={onclickDetail} />
         </>
       )}
     </div>
@@ -67,6 +98,26 @@ const Container = css`
   justify-content: center;
   align-items: center;
   padding: 12px;
+  margin-top: 31px;
+`;
+
+const OverlayContainer = css`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`;
+
+const BigTextWrapper = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Text = css`
@@ -98,4 +149,5 @@ const Icon = css`
   margin-top: auto;
   width: 24px;
   height: 24px;
+  cursor: pointer;
 `;
