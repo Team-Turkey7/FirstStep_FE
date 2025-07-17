@@ -36,7 +36,11 @@ export const Study = () => {
   return (
     <div css={Container}>
       <div css={Header}>
-        <img css={BackButton} src={backIcon} onClick={() => navigate(-1)} />
+        <img
+          css={BackButton}
+          src={backIcon}
+          onClick={() => navigate("/main")}
+        />
         <p css={DayText}>{day}</p>
       </div>
       <div css={Content}>
