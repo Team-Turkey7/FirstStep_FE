@@ -9,13 +9,12 @@ import { MarkingProblemData } from "../../apis";
 import { useNavigate } from "react-router-dom";
 
 interface QuizProps {
-  onNext: () => void;
   onBack: () => void;
   problems: CategoryDateDataResponse[];
   day: string;
 }
 
-export const MathQuiz2 = ({ onNext, onBack, problems, day }: QuizProps) => {
+export const MathQuiz2 = ({ onBack, problems, day }: QuizProps) => {
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState<string>("");
   const [isGraded, setIsGraded] = useState(false);
@@ -51,21 +50,13 @@ export const MathQuiz2 = ({ onNext, onBack, problems, day }: QuizProps) => {
         return;
       }
 
-      console.log("서버 응답:", result, "→ 변환된 결과:", finalResult);
+      console.log("서버 응답:", result, "-> 변환된 결과:", finalResult);
       setIsCorrect(finalResult);
       setIsGraded(true);
 
       setTimeout(() => {
-        // 마지막 문제인지 확인
-        const isLastProblem =
-          levelProblems.length === 1 ||
-          levelProblems.indexOf(currentProblem) === levelProblems.length - 1;
-
-        if (isLastProblem) {
-          navigate("/check-result");
-        } else {
-          onNext();
-        }
+        console.log("연산산 학습 완료 - check-result 페이지로 이동");
+        navigate(`/check-result`);
       }, 1000);
     } catch (error) {
       console.error(error as Error);

@@ -50,14 +50,7 @@ export const MathLearningView = () => {
           />
         );
       case 2:
-        return (
-          <MathQuiz2
-            onNext={handleNext}
-            onBack={handleBack}
-            problems={problems}
-            day={day}
-          />
-        );
+        return <MathQuiz2 onBack={handleBack} problems={problems} day={day} />;
       default:
         return null;
     }
