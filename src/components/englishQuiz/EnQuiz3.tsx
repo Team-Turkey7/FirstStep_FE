@@ -42,7 +42,7 @@ export const EnQuiz3 = ({ date, onBack, problems, day }: QuizProps) => {
     try {
       const result = await MarkingProblemData(
         currentProblem.id.toString(),
-        inputValue.trim()
+        inputValue.trim().toLocaleLowerCase()
       );
       console.log("서버 응답:", result);
 

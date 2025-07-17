@@ -33,7 +33,7 @@ export const MathQuiz2 = ({ onBack, problems, day, date }: QuizProps) => {
     try {
       const result = await MarkingProblemData(
         currentProblem.id.toString(),
-        inputValue.trim()
+        inputValue.trim().toLocaleLowerCase()
       );
       console.log("서버 응답:", result);
 
