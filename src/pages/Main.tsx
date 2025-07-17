@@ -17,7 +17,7 @@ export const Main = () => {
     const getCompleteResult = async () => {
       try {
         const response = await Complete();
-        setData(response.data);
+        setData(response);
       } catch (error) {
         console.error(error);
       }
@@ -26,7 +26,7 @@ export const Main = () => {
   }, []);
 
   const handleDayClick = (day: number) => {
-    navigate("/study", { state: { day } });
+    navigate(`/study/${day}`);
   };
 
   return (
