@@ -1,19 +1,18 @@
 export type CompletionResponse = {
-  date: string;
-  complete: boolean;
+  completions: Completions[];
 };
 
-export type CategoryDateDataRequest = {
-  category: string;
+export type Completions = {
   date: string;
+  isComplete: boolean;
 };
 
-export type CategoryDateDataResponse = {
+export type ProblemsResponse = Problem[];
+
+export interface Problem {
   id: number;
-  level: number;
-  problem: string;
-  problemDetail: string;
-  date: string;
+  category: string;
+  isCorrect: boolean;
+  answer: string;
   photoUrl: string;
-  audioUrl: string;
-};
+}

@@ -19,13 +19,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Onboarding />} />
         <Route path="/main" element={<Main />} />
-        <Route path="/study/:date" element={<Study />} />
-        <Route path="/korean/:date" element={<KoreanLearningView />} />
-        <Route path="/english/:date" element={<EnglishLearningView />} />
-        <Route path="/math/:date" element={<MathLearningView />} />
+        <Route path="/study" element={<Study />} />
+        <Route path="/korean" element={<KoreanLearningView />} />
+        <Route path="/english" element={<EnglishLearningView />} />
+        <Route path="/math" element={<MathLearningView />} />
         <Route path="/check-result" element={<CheckResult />} />
-        <Route path="complete-splash" element={<CompleteSplash />} />
-        <Route path="wrong-answer" element={<WrongAnswer />} />
+        <Route path="/complete-splash" element={<CompleteSplash />} />
+        <Route path="/wrong-answer" element={<WrongAnswer />} />
       </Routes>
     </BrowserRouter>
   );

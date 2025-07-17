@@ -1,49 +1,56 @@
 import styled from "@emotion/styled";
 import check from "../assets/check.svg";
 import cross from "../assets/cross.svg";
-import apple from "../assets/apple.svg";
 
-type CardState = "right" | "wrong" | "all";
+type CardState = "all" | "wrong" | "right";
 
 interface Prop {
-  state: CardState;
-  problem: string;
+  state?: string;
+  problem?: string;
+  answer?: string;
+  isCorrect?: boolean;
+  url: string;
 }
 
-export const AnswerCard = ({ state, problem }: Prop) => {
-  const getCardContent = () => {
-    switch (state) {
-      case "right":
-        return (
-          <>
-            <Wrap>
-              <img src={apple} />
-              {problem}
-            </Wrap>
-            <img src={check} />
-          </>
-        );
-      case "wrong":
-        return (
-          <>
-            <Wrap>
-              <img src={apple} />
-              {problem}
-            </Wrap>
-            <img src={cross} />
-          </>
-        );
-      case "all":
-        return (
-          <Wrap>
-            <img src={apple} />
-            {problem}
-          </Wrap>
-        );
-    }
+export const AnswerCard = ({
+  state,
+  answer,
+  isCorrect,
+  problem,
+  url,
+}: Prop) => {
+  const getDisplayState = () => {
+    if (state === "all") return "all";
+    return isCorrect ? "wrong" : "right";
   };
 
-  return <Card state={state}>{getCardContent()}</Card>;
+  const displayState = getDisplayState();
+
+  const getCardContent = () => {
+    if (displayState === "all") {
+      return (
+        <Wrap>
+          <img src={url} />
+          {problem}
+          {" : "}
+          {answer}
+        </Wrap>
+      );
+    }
+
+    return (
+      <>
+        <Wrap>
+          <img src={url} />
+          {problem}
+          {answer}
+        </Wrap>
+        <img src={displayState === "right" ? check : cross} />
+      </>
+    );
+  };
+
+  return <Card state={displayState}>{getCardContent()}</Card>;
 };
 
 const Card = styled.button<{ state: CardState }>`
@@ -75,4 +82,8 @@ const Wrap = styled.div`
   display: flex;
   align-items: center;
   gap: 15px;
+  img {
+    width: 35px;
+    height: 35px;
+  }
 `;

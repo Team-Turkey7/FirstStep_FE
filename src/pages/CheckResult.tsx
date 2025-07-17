@@ -2,11 +2,35 @@ import styled from "@emotion/styled";
 import { AnswerCard } from "../components/AnswerCard";
 import NextButton from "../components/NextButton";
 import { MathAnswer } from "../components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CompleteSplash from "./CompleteSplash";
+import { useLocation } from "react-router-dom";
+import { CheckAnswers } from "../apis/inedx";
+import { Problem } from "../apis/type";
 
 const CheckResult = () => {
+  const location = useLocation();
+  //const date = location.state.date;
+  const date = "1일차";
+
   const [showSplash, setShowSplash] = useState(false);
+  const [problems, setProblems] = useState<Problem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchAnswers = async () => {
+      try {
+        const response = await CheckAnswers(date);
+        setProblems(response.data);
+      } catch (error) {
+        console.error("답안 확인 중 오류! : ", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAnswers();
+  }, [date]);
 
   const handleComplete = () => {
     setShowSplash(true);
@@ -15,26 +39,38 @@ const CheckResult = () => {
   if (showSplash) {
     return <CompleteSplash />;
   }
+
+  if (loading) {
+    return <div>로딩 중...</div>;
+  }
+
   return (
     <Container>
       <Section>
         정답 확인
         <CardWrap>
-          <AnswerCard state="right" problem="hello" />
-          <AnswerCard state="wrong" problem="hello" />
-          <AnswerCard state="right" problem="hello" />
-          <AnswerCard state="wrong" problem="hello" />
-          <MathAnswer state="right" problemId={1} problem="3+4" answer="7" />
-          <MathAnswer
-            state="wrong"
-            problemId={2}
-            problem="태수와 고래밥"
-            answer="6개"
-            problemDetail="태수는 20개의 고래밥을 가지고 있다.
-          하지만 정욱이가 고래밥이 너무 가지고 싶어 
-          태수의 고래밥 14개를 뺏었다.
-          태수가 가지고 있는 고래밥의 개수는? "
-          />
+          {problems.map((problem) => {
+            if (problem.category === "MATH") {
+              return (
+                <MathAnswer
+                  key={problem.id}
+                  isCorrect={problem.isCorrect}
+                  problem={problem.problem}
+                  answer={problem.answer}
+                  problemDetail={problem.problemDetail}
+                />
+              );
+            } else if (problem.level === 3) {
+              return (
+                <AnswerCard
+                  url={problem.photoUrl}
+                  key={problem.id}
+                  answer={problem.answer}
+                  isCorrect={problem.isCorrect}
+                />
+              );
+            }
+          })}
         </CardWrap>
       </Section>
       <NextButton state="completed" onClick={handleComplete} />

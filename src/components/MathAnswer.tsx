@@ -5,28 +5,31 @@ import { bottomArrow } from "../assets";
 type AnswerState = "right" | "wrong" | "all";
 
 interface ITestType {
-  state: AnswerState;
-  problemId: number;
+  state?: string;
+  isCorrect?: boolean;
   problem: string;
   problemDetail?: string;
-  answer: string;
+  answer?: string;
 }
 
 export const MathAnswer = ({
   state,
-  problemId,
+  isCorrect,
   problem,
   problemDetail,
   answer,
 }: ITestType) => {
   const [active, setActive] = useState(false);
 
+  const getDisplayState = (): AnswerState => {
+    if (state === "all") return "all";
+    return isCorrect ? "right" : "wrong";
+  };
+
+  const displayState = getDisplayState();
+
   return (
-    <Wrapper
-      state={state}
-      key={problemId}
-      onClick={() => setActive((prev) => !prev)}
-    >
+    <Wrapper state={displayState} onClick={() => setActive((prev) => !prev)}>
       <Header>
         <Question>{problem}</Question>
         <ArrowIcon $active={active}>
