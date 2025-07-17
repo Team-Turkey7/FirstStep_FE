@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { EnQuiz1, EnQuiz2, EnQuiz3 } from "../../components";
 import { CategoryDateData } from "../../apis";
-import { CategoryDateDataResponse } from "../../apis/types";
+import { CategoryDateDataResponse } from "../../apis/type";
 import { useParams } from "react-router-dom";
 
 export const EnglishLearningView = () => {

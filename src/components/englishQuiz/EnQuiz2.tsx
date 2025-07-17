@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { Speaker, QuizCard } from "..";
 import NextButton from "../NextButton";
 import { backIcon } from "../../assets";
-import { CategoryDateDataResponse } from "../../apis/types";
+import { CategoryDateDataResponse } from "../../apis/type";
 
 interface QuizProps {
   onNext: () => void;

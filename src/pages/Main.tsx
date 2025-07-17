@@ -26,7 +26,7 @@ export const Main = () => {
   }, []);
 
   const handleDayClick = (date: number) => {
-    navigate("/study", { state: { date: `${date}일차` } });
+    navigate(`/study/${date}`);
   };
 
   return (

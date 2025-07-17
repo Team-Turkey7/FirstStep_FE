@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { Speaker, QuizCard } from "..";
 import NextButton from "../NextButton";
 import { backIcon } from "../../assets";
-import { CategoryDateDataResponse } from "../../apis/types";
+import { CategoryDateDataResponse } from "../../apis/type";
 
 interface QuizProps {
   onNext: () => void;
@@ -15,6 +15,16 @@ export const Quiz2 = ({ onNext, onBack, problems, day }: QuizProps) => {
   const levelProblems = problems.filter((problem) => problem.level === 2);
   const currentProblem = levelProblems[0];
 
+  if (!currentProblem) {
+    return (
+      <Container>
+        <div>문제를 불러오는 중...</div>
+      </Container>
+    );
+  }
+
+  const speakerText = `${currentProblem.problem}, ${currentProblem.problemDetail}`;
+
   return (
     <Container>
       <Header>
@@ -26,9 +36,7 @@ export const Quiz2 = ({ onNext, onBack, problems, day }: QuizProps) => {
 
       <Content>
         <Title>간단한 단어</Title>
-        <Speaker
-          text={(currentProblem.problem, currentProblem.problemDetail)}
-        />
+        <Speaker text={speakerText} />
         <QuizCard
           num={2}
           problem={currentProblem.problem}
