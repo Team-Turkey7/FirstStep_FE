@@ -13,10 +13,6 @@ export interface Problem {
   id: number;
   category: string;
   isCorrect: boolean;
-  level: number;
-  problem: string;
-  problemDetail: string;
-  date: string;
   answer: string;
   photoUrl: string;
 }

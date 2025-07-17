@@ -6,16 +6,19 @@ import MathIcon from "../assets/img/Math.svg";
 import { colors } from "../styles";
 import { Speaker } from "../components/Speaker";
 import backIcon from "../assets/img/backIcon.svg";
+import { useLocation, useNavigate } from "react-router-dom";
+import { CategoryDateData } from "../apis";
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 
 const Topic = [
-  { icon: KoreanIcon, name: "한글" },
-  { icon: EnglishIcon, name: "영어" },
-  { icon: MathIcon, name: "연산" },
+  { icon: KoreanIcon, name: "한글", code: "KOREAN", path: "korean" },
+  { icon: EnglishIcon, name: "영어", code: "ENGLISH", path: "english" },
+  { icon: MathIcon, name: "연산", code: "MATH", path: "math" },
 ];
 
 export const Study = () => {
+  const location = useLocation();
+  const date = location.state?.date || "1일차";
   const navigate = useNavigate();
   const [selectedTopic, setSelectedTopic] = useState("한글, 영어, 연산");
   const { date } = useParams<{ date: string }>();
@@ -33,25 +36,42 @@ export const Study = () => {
     }
   };
 
+  const handleTopicClick = async (topic: (typeof Topic)[number]) => {
+    try {
+      setSelectedTopic(topic.name);
+
+      const response = await CategoryDateData(topic.code, date);
+      console.log(date);
+
+      navigate(`/${topic.path}`, {
+        state: {
+          data: response,
+          date: date,
+          category: topic.code,
+        },
+      });
+    } catch (error) {
+      console.error("API 요청 실패:", error);
+    }
+  };
+
   return (
     <div css={Container}>
       <div css={Header}>
-        <img
-          css={BackButton}
-          src={backIcon}
-          onClick={() => navigate("/main")}
-        />
-        <p css={DayText}>{day}</p>
+        <img css={BackButton} src={backIcon} onClick={() => navigate(-1)} />
+        <p css={DayText}>{date}</p>
       </div>
+
       <div css={Content}>
         <p css={Title}>학습하기</p>
         <Speaker text={selectedTopic} />
+
         <div css={ButtonWrapper}>
-          {Topic.map((topic, index) => (
+          {Topic.map((topic) => (
             <div
-              key={index}
+              key={topic.code}
               css={TopicButton}
-              onClick={() => handleTopicSelect(topic.name)}
+              onClick={() => handleTopicClick(topic)}
             >
               <img css={Icon} src={topic.icon} />
               <p css={Subject}>{topic.name}</p>
@@ -103,8 +123,6 @@ const Content = css`
   gap: 20px;
   margin-top: 48px;
   width: 100%;
-  display: flex;
-  flex-direction: column;
   align-items: center;
 `;
 
@@ -131,6 +149,7 @@ const TopicButton = css`
   background-color: ${colors.colors.main[40]};
   border-radius: 15px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 `;
 
 const Icon = css`
