@@ -25,8 +25,8 @@ export const Main = () => {
     getCompleteResult();
   }, []);
 
-  const handleDayClick = (day: number) => {
-    navigate(`/study/${day}`);
+  const handleDayClick = (date: number) => {
+    navigate("/study", { state: { date: `${date}일차` } });
   };
 
   return (
