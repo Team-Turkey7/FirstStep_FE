@@ -1,17 +1,15 @@
 import styled from "@emotion/styled";
 import { Speaker, QuizCard } from "..";
 import NextButton from "../NextButton";
-import { backIcon } from "../../assets";
-import { CategoryDateDataResponse } from "../../apis/types";
+import { CategoryDateDataResponse } from "../../apis/type";
 
 interface QuizProps {
   onNext: () => void;
-  onBack: () => void;
   problems: CategoryDateDataResponse[];
   day: string;
 }
 
-export const EnQuiz1 = ({ onNext, onBack, problems, day }: QuizProps) => {
+export const EnQuiz1 = ({ onNext, problems, day }: QuizProps) => {
   const levelProblems = problems.filter((problem) => problem.level === 1);
   const currentProblem = levelProblems[0];
 
@@ -26,9 +24,6 @@ export const EnQuiz1 = ({ onNext, onBack, problems, day }: QuizProps) => {
   return (
     <Container>
       <Header>
-        <BackButton onClick={onBack}>
-          <img src={backIcon} alt="뒤로가기" />
-        </BackButton>
         <DayText>{day}</DayText>
       </Header>
 
@@ -63,14 +58,6 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-`;
-
-const BackButton = styled.button`
-  background: none;
-  border: none;
-  padding: 0;
-  position: absolute;
-  left: 0;
 `;
 
 const DayText = styled.div`

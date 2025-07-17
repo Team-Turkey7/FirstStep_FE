@@ -3,19 +3,17 @@ import { useState } from "react";
 import { Speaker, QuizCard } from "../../components";
 import NextButton from "../NextButton";
 import { InputAnswer } from "../../components/InputAnswer";
-import { backIcon } from "../../assets";
 import { CategoryDateDataResponse } from "../../apis/type";
 import { MarkingProblemData } from "../../apis";
 import { useNavigate } from "react-router-dom";
 
 interface QuizProps {
   onNext: () => void;
-  onBack: () => void;
   problems: CategoryDateDataResponse[];
   day: string;
 }
 
-export const MathQuiz1 = ({ onNext, onBack, problems, day }: QuizProps) => {
+export const MathQuiz1 = ({ onNext, problems, day }: QuizProps) => {
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState("");
   const [isGraded, setIsGraded] = useState(false);
@@ -89,9 +87,6 @@ export const MathQuiz1 = ({ onNext, onBack, problems, day }: QuizProps) => {
   return (
     <Container>
       <Header>
-        <BackButton onClick={onBack}>
-          <img src={backIcon} alt="뒤로가기" />
-        </BackButton>
         <DayText>{day}</DayText>
       </Header>
 
@@ -155,14 +150,6 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-`;
-
-const BackButton = styled.button`
-  background: none;
-  border: none;
-  padding: 0;
-  position: absolute;
-  left: 0;
 `;
 
 const DayText = styled.div`

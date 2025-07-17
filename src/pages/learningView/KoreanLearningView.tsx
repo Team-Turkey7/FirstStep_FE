@@ -41,14 +41,7 @@ export const KoreanLearningView = () => {
   const renderQuiz = () => {
     switch (currentQuiz) {
       case 1:
-        return (
-          <Quiz1
-            onNext={handleNext}
-            onBack={handleBack}
-            problems={problems}
-            day={day}
-          />
-        );
+        return <Quiz1 onNext={handleNext} problems={problems} day={day} />;
       case 2:
         return (
           <Quiz2

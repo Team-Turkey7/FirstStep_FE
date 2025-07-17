@@ -41,14 +41,7 @@ export const EnglishLearningView = () => {
   const renderQuiz = () => {
     switch (currentQuiz) {
       case 1:
-        return (
-          <EnQuiz1
-            onNext={handleNext}
-            onBack={handleBack}
-            problems={problems}
-            day={day}
-          />
-        );
+        return <EnQuiz1 onNext={handleNext} problems={problems} day={day} />;
       case 2:
         return (
           <EnQuiz2

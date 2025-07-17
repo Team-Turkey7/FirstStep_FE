@@ -4,13 +4,13 @@ import NextButton from "../components/NextButton";
 import { MathAnswer } from "../components";
 import { useEffect, useState } from "react";
 import CompleteSplash from "./CompleteSplash";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { CheckAnswers } from "../apis/index";
 import { Problem } from "../apis/type";
 
 const CheckResult = () => {
-  const location = useLocation();
-  const date = location.state.date;
+  const { date } = useParams<{ date: string }>();
+  const day = `${date}일차`;
 
   const [showSplash, setShowSplash] = useState(false);
   const [problems, setProblems] = useState<Problem[]>([]);
@@ -19,7 +19,7 @@ const CheckResult = () => {
   useEffect(() => {
     const fetchAnswers = async () => {
       try {
-        const response = await CheckAnswers(date);
+        const response = await CheckAnswers(day || "1일차");
         setProblems(response.data);
       } catch (error) {
         console.error("답안 확인 중 오류! : ", error);
@@ -29,7 +29,7 @@ const CheckResult = () => {
     };
 
     fetchAnswers();
-  }, [date]);
+  }, [day]);
 
   const handleComplete = () => {
     setShowSplash(true);

@@ -23,7 +23,7 @@ function App() {
         <Route path="/korean/:date" element={<KoreanLearningView />} />
         <Route path="/english/:date" element={<EnglishLearningView />} />
         <Route path="/math/:date" element={<MathLearningView />} />
-        <Route path="/check-result" element={<CheckResult />} />
+        <Route path="/check-result/:date" element={<CheckResult />} />
         <Route path="/complete-splash" element={<CompleteSplash />} />
         <Route path="/wrong-answer" element={<WrongAnswer />} />
       </Routes>

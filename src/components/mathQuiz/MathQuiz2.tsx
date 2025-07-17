@@ -12,9 +12,10 @@ interface QuizProps {
   onBack: () => void;
   problems: CategoryDateDataResponse[];
   day: string;
+  date: string;
 }
 
-export const MathQuiz2 = ({ onBack, problems, day }: QuizProps) => {
+export const MathQuiz2 = ({ onBack, problems, day, date }: QuizProps) => {
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState<string>("");
   const [isGraded, setIsGraded] = useState(false);
@@ -56,7 +57,7 @@ export const MathQuiz2 = ({ onBack, problems, day }: QuizProps) => {
 
       setTimeout(() => {
         console.log("연산산 학습 완료 - check-result 페이지로 이동");
-        navigate(`/check-result`);
+        navigate(`/check-result/${date}`);
       }, 1000);
     } catch (error) {
       console.error(error as Error);

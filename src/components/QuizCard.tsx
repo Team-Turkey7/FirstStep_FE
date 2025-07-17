@@ -31,7 +31,7 @@ export const QuizCard = ({
     return (
       <div css={OverlayContainer} onClick={closeBigText}>
         <div css={BigTextWrapper} onClick={(e) => e.stopPropagation()}>
-          <BigText problemDetail={problem || ""} onBack={closeBigText} />
+          <BigText problemDetail={problemDetail || ""} onBack={closeBigText} />
         </div>
       </div>
     );
@@ -69,7 +69,7 @@ export const QuizCard = ({
 
       {num === 8 && (
         <>
-          <p css={Problem}>{problem}</p>
+          <p css={Problem}>{problemDetail}</p>
           <img css={Icon} src={seatchIcon} onClick={onclickDetail} />
         </>
       )}
@@ -131,6 +131,11 @@ const Problem = css`
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Icon = css`

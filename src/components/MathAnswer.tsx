@@ -23,7 +23,7 @@ export const MathAnswer = ({
 
   const getDisplayState = (): AnswerState => {
     if (state === "all") return "all";
-    return isCorrect ? "right" : "wrong";
+    return isCorrect ? "wrong" : "right";
   };
 
   const displayState = getDisplayState();

@@ -8,7 +8,7 @@ export const MathLearningView = () => {
   const [currentQuiz, setCurrentQuiz] = useState(1);
   const [problems, setProblems] = useState<CategoryDateDataResponse[]>([]);
   const { date } = useParams<{ date: string }>();
-  const day = `${date}일차`;
+  const day = `${date || "1"}일차`;
 
   useEffect(() => {
     const fetchProblems = async () => {
@@ -41,16 +41,16 @@ export const MathLearningView = () => {
   const renderQuiz = () => {
     switch (currentQuiz) {
       case 1:
+        return <MathQuiz1 onNext={handleNext} problems={problems} day={day} />;
+      case 2:
         return (
-          <MathQuiz1
-            onNext={handleNext}
+          <MathQuiz2
+            date={date || "1"}
             onBack={handleBack}
             problems={problems}
             day={day}
           />
         );
-      case 2:
-        return <MathQuiz2 onBack={handleBack} problems={problems} day={day} />;
       default:
         return null;
     }
