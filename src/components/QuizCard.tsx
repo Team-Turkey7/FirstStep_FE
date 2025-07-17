@@ -6,9 +6,17 @@ import { BigText } from "./BigText";
 
 interface QuizCardProps {
   num: number;
+  problem: string;
+  problemDetail?: string;
+  photoURL?: string;
 }
 
-export const QuizCard = ({ num }: QuizCardProps) => {
+export const QuizCard = ({
+  num,
+  problem,
+  problemDetail,
+  photoURL,
+}: QuizCardProps) => {
   const [showBigText, setShowBigText] = useState(false);
 
   const onclickDetail = () => {
@@ -19,14 +27,11 @@ export const QuizCard = ({ num }: QuizCardProps) => {
     setShowBigText(false);
   };
 
-  const problemDetail =
-    "태수는 20개의 고래밥을 가지고 있다. 하지만 정욱이가 고래밥이 너무 가지고 싶어 태수의 고래밥 14개를 뺏었다. 태수가 가지고 있는 고래밥의 개수는?";
-
   if (showBigText) {
     return (
       <div css={OverlayContainer} onClick={closeBigText}>
         <div css={BigTextWrapper} onClick={(e) => e.stopPropagation()}>
-          <BigText problemDetail={problemDetail} onBack={closeBigText} />
+          <BigText problemDetail={problem || ""} onBack={closeBigText} />
         </div>
       </div>
     );
@@ -36,50 +41,35 @@ export const QuizCard = ({ num }: QuizCardProps) => {
     <div css={Container}>
       {num === 1 && (
         <>
-          <p css={Text}>ㄱ</p>
-          <p css={Pronunciation}>기역</p>
+          <p css={Text}>{problem}</p>
+          <p css={Pronunciation}>{problemDetail}</p>
         </>
       )}
 
-      {num === 2 && <p css={Text}>사과</p>}
+      {num === 2 && <p css={Text}>{problem}</p>}
 
-      {num === 3 && (
-        <img
-          css={Image}
-          src="https://item.kakaocdn.net/do/bd24f6a0b8e2710b109ed04a636b969c8b566dca82634c93f811198148a26065"
-        />
-      )}
+      {num === 3 && <img css={Image} src={photoURL} />}
 
       {num === 4 && (
         <>
-          <p css={Text}>A</p>
-          <p css={Pronunciation}>에이</p>
+          <p css={Text}>{problem}</p>
+          <p css={Pronunciation}>{problemDetail}</p>
         </>
       )}
 
       {num === 5 && (
         <>
-          <p css={Text}>Apple</p>
-          <p css={Pronunciation}>[애플]</p>
-          <p css={Pronunciation}>사과</p>
+          <p css={Text}>{problem}</p>
+          <p css={Pronunciation}>[{problemDetail}]</p>
         </>
       )}
-      {num === 6 && (
-        <img
-          css={Image}
-          src="https://item.kakaocdn.net/do/bd24f6a0b8e2710b109ed04a636b969c8b566dca82634c93f811198148a26065"
-        />
-      )}
+      {num === 6 && <img css={Image} src={photoURL} />}
 
-      {num === 7 && <p css={Text}>3+4</p>}
+      {num === 7 && <p css={Text}>{problem}</p>}
 
       {num === 8 && (
         <>
-          <p css={Problem}>
-            태수는 20개의 고래밥을 가지고 있다. 하지만 정욱이가 고래밥이 너무
-            가지고 싶어 태수의 고래밥 14개를 뺏었다. 태수가 가지고 있는 고래밥의
-            개수는?
-          </p>
+          <p css={Problem}>{problem}</p>
           <img css={Icon} src={seatchIcon} onClick={onclickDetail} />
         </>
       )}

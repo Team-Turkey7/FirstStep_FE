@@ -4,18 +4,24 @@ import { Speaker, QuizCard } from "../../components";
 import NextButton from "../NextButton";
 import { InputAnswer } from "../../components/InputAnswer";
 import { backIcon } from "../../assets";
+import { CategoryDateDataResponse } from "../../apis/types";
+import { MarkingProblemData } from "../../apis/index";
+import { useNavigate } from "react-router-dom";
 
 interface QuizProps {
-  onNext: () => void;
   onBack: () => void;
+  problems: CategoryDateDataResponse[];
+  day: string;
+  date: string;
 }
 
-export const Quiz3 = ({ onNext, onBack }: QuizProps) => {
+export const Quiz3 = ({ date = "1", onBack, problems, day }: QuizProps) => {
+  const navigate = useNavigate();
   const [inputValue, setInputValue] = useState("");
   const [isGraded, setIsGraded] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-
-  const correctAnswer = "사과";
+  const levelProblems = problems.filter((problem) => problem.level === 3);
+  const currentProblem = levelProblems[0];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -23,22 +29,44 @@ export const Quiz3 = ({ onNext, onBack }: QuizProps) => {
     setIsCorrect(null);
   };
 
-  const handleCheckAnswer = () => {
-    const result = inputValue.trim() === correctAnswer;
-    setIsCorrect(result);
-    setIsGraded(true);
+  const handleCheckAnswer = async () => {
+    try {
+      const result = await MarkingProblemData(
+        currentProblem.id.toString(),
+        inputValue.trim()
+      );
+      console.log("서버 응답:", result);
 
-    setTimeout(() => {
-      onNext();
-      console.log("next");
-    }, 1000);
+      // 서버 응답을 반대로 처리
+      // 서버: false = 정답, true = 오답
+      // 우리: true = 정답, false = 오답
+      let finalResult: boolean;
+
+      if (typeof result === "boolean") {
+        finalResult = !result; // 반대로 변환
+      } else if (result && typeof result.result === "boolean") {
+        finalResult = !result.result; // 반대로 변환
+      } else {
+        console.error("알 수 없는 응답 형식:", !result);
+        return;
+      }
+
+      console.log("서버 응답:", result, "-> 변환된 결과:", finalResult);
+      setIsCorrect(finalResult);
+      setIsGraded(true);
+
+      setTimeout(() => {
+        console.log("한글 학습 완료 - study 페이지로 이동");
+        navigate(`/study/${date}`);
+      }, 1000);
+    } catch (error) {
+      console.error(error as Error);
+    }
   };
 
   const handleNext = () => {
     if (!isGraded) {
       handleCheckAnswer();
-    } else {
-      onNext();
     }
   };
 
@@ -48,15 +76,22 @@ export const Quiz3 = ({ onNext, onBack }: QuizProps) => {
         <BackButton onClick={onBack}>
           <img src={backIcon} alt="뒤로가기" />
         </BackButton>
-        <DayText>1일차</DayText>
+        <DayText>{day}</DayText>
       </Header>
 
       <Content>
         <Title>그림보고 단어 맞추기</Title>
-        <Speaker text="" />
+        <Speaker
+          text={(currentProblem.problem, currentProblem.problemDetail)}
+        />
 
         <QuizCardContainer>
-          <QuizCard num={3} />
+          <QuizCard
+            num={3}
+            problem={currentProblem.problem}
+            problemDetail={currentProblem.problemDetail}
+            photoURL={currentProblem.photoUrl}
+          />
           {isGraded && (
             <FeedbackOverlay>
               {isCorrect ? (

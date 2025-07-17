@@ -2,26 +2,38 @@ import styled from "@emotion/styled";
 import { Speaker, QuizCard } from "..";
 import NextButton from "../NextButton";
 import { backIcon } from "../../assets";
+import { CategoryDateDataResponse } from "../../apis/types";
 
 interface QuizProps {
   onNext: () => void;
   onBack: () => void;
+  problems: CategoryDateDataResponse[];
+  day: string;
 }
 
-export const Quiz2 = ({ onNext, onBack }: QuizProps) => {
+export const Quiz2 = ({ onNext, onBack, problems, day }: QuizProps) => {
+  const levelProblems = problems.filter((problem) => problem.level === 2);
+  const currentProblem = levelProblems[0];
+
   return (
     <Container>
       <Header>
         <BackButton onClick={onBack}>
           <img src={backIcon} alt="뒤로가기" />
         </BackButton>
-        <DayText>1일차</DayText>
+        <DayText>{day}</DayText>
       </Header>
 
       <Content>
         <Title>간단한 단어</Title>
-        <Speaker text="" />
-        <QuizCard num={2} />
+        <Speaker
+          text={(currentProblem.problem, currentProblem.problemDetail)}
+        />
+        <QuizCard
+          num={2}
+          problem={currentProblem.problem}
+          problemDetail={currentProblem.problemDetail}
+        />
       </Content>
       <ButtonWrapper>
         <NextButton state="active" onClick={onNext} />

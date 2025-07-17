@@ -21,6 +21,20 @@ export const Study = () => {
   const date = location.state?.date || "1일차";
   const navigate = useNavigate();
   const [selectedTopic, setSelectedTopic] = useState("한글, 영어, 연산");
+  const { date } = useParams<{ date: string }>();
+  const day = `${date}일차`;
+
+  const handleTopicSelect = (topicName: string) => {
+    setSelectedTopic(topicName);
+
+    if (topicName === "한글") {
+      navigate(`/korean/${date}`);
+    } else if (topicName === "영어") {
+      navigate(`/english/${date}`);
+    } else if (topicName === "연산") {
+      navigate(`/math/${date}`);
+    }
+  };
 
   const handleTopicClick = async (topic: (typeof Topic)[number]) => {
     try {
