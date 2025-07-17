@@ -50,7 +50,7 @@ const Header = css`
 
 const BackButton = css`
   width: 22px;
-  height: 22px;
+  height: 2px;
   cursor: pointer;
   margin-left: 20px;
   margin-top: 20px;

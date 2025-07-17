@@ -81,9 +81,7 @@ export const Quiz3 = ({ date = "1", onBack, problems, day }: QuizProps) => {
 
       <Content>
         <Title>그림보고 단어 맞추기</Title>
-        <Speaker
-          text={(currentProblem.problem, currentProblem.problemDetail)}
-        />
+        <Speaker text="그림을 보고 알맞은 단어를 맞추세요." />
 
         <QuizCardContainer>
           <QuizCard

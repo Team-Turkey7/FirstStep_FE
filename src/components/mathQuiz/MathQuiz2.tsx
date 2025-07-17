@@ -80,9 +80,7 @@ export const MathQuiz2 = ({ onBack, problems, day }: QuizProps) => {
 
       <Content>
         <Title>상황에 따른 사칙연산</Title>
-        <Speaker
-          text={(currentProblem.problem, currentProblem.problemDetail)}
-        />
+        <Speaker text="상황에 따른 사칙연산" />
 
         <QuizCardContainer>
           <QuizCard

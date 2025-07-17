@@ -97,9 +97,7 @@ export const MathQuiz1 = ({ onNext, onBack, problems, day }: QuizProps) => {
 
       <Content>
         <Title>사칙연산</Title>
-        <Speaker
-          text={(currentProblem.problem, currentProblem.problemDetail)}
-        />
+        <Speaker text="사칙연산" />
 
         <QuizCardContainer>
           <QuizCard
