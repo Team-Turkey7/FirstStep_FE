@@ -4,7 +4,7 @@ import { AnswerCard } from "../components/AnswerCard";
 import { MathAnswer } from "../components";
 import { useEffect, useState } from "react";
 import { Problem } from "../apis/type";
-import { CheckWrongAnswers } from "../apis/inedx";
+import { CheckWrongAnswers } from "../apis/index";
 
 const WrongAnswer = () => {
   const [problems, setProblems] = useState<Problem[]>([]);

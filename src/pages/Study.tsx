@@ -6,8 +6,7 @@ import MathIcon from "../assets/img/Math.svg";
 import { colors } from "../styles";
 import { Speaker } from "../components/Speaker";
 import backIcon from "../assets/img/backIcon.svg";
-import { useLocation, useNavigate } from "react-router-dom";
-import { CategoryDateData } from "../apis";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 
 const Topic = [
@@ -17,8 +16,6 @@ const Topic = [
 ];
 
 export const Study = () => {
-  const location = useLocation();
-  const date = location.state?.date || "1일차";
   const navigate = useNavigate();
   const [selectedTopic, setSelectedTopic] = useState("한글, 영어, 연산");
   const { date } = useParams<{ date: string }>();
@@ -36,30 +33,11 @@ export const Study = () => {
     }
   };
 
-  const handleTopicClick = async (topic: (typeof Topic)[number]) => {
-    try {
-      setSelectedTopic(topic.name);
-
-      const response = await CategoryDateData(topic.code, date);
-      console.log(date);
-
-      navigate(`/${topic.path}`, {
-        state: {
-          data: response,
-          date: date,
-          category: topic.code,
-        },
-      });
-    } catch (error) {
-      console.error("API 요청 실패:", error);
-    }
-  };
-
   return (
     <div css={Container}>
       <div css={Header}>
         <img css={BackButton} src={backIcon} onClick={() => navigate(-1)} />
-        <p css={DayText}>{date}</p>
+        <p css={DayText}>{day}</p>
       </div>
 
       <div css={Content}>
@@ -71,7 +49,7 @@ export const Study = () => {
             <div
               key={topic.code}
               css={TopicButton}
-              onClick={() => handleTopicClick(topic)}
+              onClick={() => handleTopicSelect(topic.name)}
             >
               <img css={Icon} src={topic.icon} />
               <p css={Subject}>{topic.name}</p>

@@ -5,13 +5,12 @@ import { MathAnswer } from "../components";
 import { useEffect, useState } from "react";
 import CompleteSplash from "./CompleteSplash";
 import { useLocation } from "react-router-dom";
-import { CheckAnswers } from "../apis/inedx";
+import { CheckAnswers } from "../apis/index";
 import { Problem } from "../apis/type";
 
 const CheckResult = () => {
   const location = useLocation();
-  //const date = location.state.date;
-  const date = "1일차";
+  const date = location.state.date;
 
   const [showSplash, setShowSplash] = useState(false);
   const [problems, setProblems] = useState<Problem[]>([]);
