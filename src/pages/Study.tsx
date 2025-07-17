@@ -20,6 +20,7 @@ export const Study = () => {
   const day = location.state?.day || 1;
   const navigate = useNavigate();
   const [selectedTopic, setSelectedTopic] = useState("한글, 영어, 연산");
+
   return (
     <div css={Container}>
       <div css={Header}>
@@ -102,8 +103,8 @@ const ButtonWrapper = css`
 
 const TopicButton = css`
   display: flex;
-  width: 129px;
-  height: 52px;
+  width: 340px;
+  height: 96px;
   align-items: center;
   gap: 18px;
   padding: 22px 136px 22px 75px;
